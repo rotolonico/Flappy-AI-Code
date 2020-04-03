@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.Rider2019.2/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.2/system/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_Flappy AI.1597339640.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Game" t="Include">
+            <e p="FlappyController.cs" t="Include" />
+            <e p="FlappyHandler.cs" t="Include" />
+            <e p="PipeHandler.cs" t="Include" />
+            <e p="PipeSpawner.cs" t="Include" />
+            <e p="RightForce.cs" t="Include" />
+            <e p="Settings.cs" t="Include" />
+          </e>
+          <e p="IO" t="Include">
+            <e p="InputsRetriever.cs" t="Include" />
+          </e>
+          <e p="Utils" t="Include">
+            <e p="RandomnessHandler.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Flappy AI.sln" t="IncludeFlat" />
+      <e p="Temp/bin" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
