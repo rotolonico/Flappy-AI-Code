@@ -11,6 +11,13 @@
             <e p="LiteNN" t="Include">
               <e p="LiteNeuralNetwork.cs" t="Include" />
             </e>
+            <e p="NEAT" t="Include">
+              <e p="Genes" t="Include">
+                <e p="ConnectionGene.cs" t="Include" />
+                <e p="NodeGene.cs" t="Include" />
+              </e>
+              <e p="Genome.cs" t="Include" />
+            </e>
             <e p="Population.cs" t="Include" />
           </e>
           <e p="Game" t="Include">

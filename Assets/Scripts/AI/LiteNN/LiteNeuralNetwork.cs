@@ -46,10 +46,7 @@ namespace AI.LiteNN
                     weights[i][j] = new float[values[i].Length];
                     weightsSmudge[i][j] = new float[values[i].Length];
                     for (var k = 0; k < weights[i][j].Length; k++)
-                    {
-                        weights[i][j][k] = RandomnessHandler.RandomZeroToOne();// * Mathf.Sqrt(2f / weights[i][j].Length);
-                        weightsSmudge[i][j][k] = weights[i][j][k];
-                    }
+                        weights[i][j][k] = RandomnessHandler.RandomZeroToOne();
                 }
             }
 
@@ -64,11 +61,7 @@ namespace AI.LiteNN
                 weights[hiddenLayers.Count][j] = new float[values[hiddenLayers.Count].Length];
                 weightsSmudge[hiddenLayers.Count][j] = new float[values[hiddenLayers.Count].Length];
                 for (var k = 0; k < weights[hiddenLayers.Count][j].Length; k++)
-                {
-                    weights[hiddenLayers.Count][j][k] = RandomnessHandler.RandomZeroToOne();// *
-                                                        //Mathf.Sqrt(2f / weights[hiddenLayers.Count][j].Length);
-                    weightsSmudge[hiddenLayers.Count][j][k] = weights[hiddenLayers.Count][j][k];
-                }
+                    weights[hiddenLayers.Count][j][k] = RandomnessHandler.RandomZeroToOne();
             }
         }
 
@@ -103,14 +96,15 @@ namespace AI.LiteNN
                 {
                     for (var k = 0; k < values[j].Length; k++)
                     {
-                        var biasSmudge = BasicFunctions.SigmoidDerivative(values[j][k]) * (desiredValues[j][k] - values[j][k]);
+                        var biasSmudge = BasicFunctions.SigmoidDerivative(values[j][k]) *
+                                         (desiredValues[j][k] - values[j][k]);
                         biasesSmudge[j][k] += biasSmudge;
 
                         for (var l = 0; l < values[j - 1].Length; l++)
                         {
                             var weightSmudge = values[j - 1][l] * biasSmudge;
                             weightsSmudge[j - 1][k][l] += weightSmudge;
-                        
+
                             var valueSmudge = weights[j - 1][k][l] * biasSmudge;
                             desiredValues[j - 1][l] += valueSmudge;
                         }
