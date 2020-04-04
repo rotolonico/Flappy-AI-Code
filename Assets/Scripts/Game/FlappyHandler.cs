@@ -5,18 +5,16 @@ namespace Game
 {
     public class FlappyHandler : MonoBehaviour
     {
-        public static FlappyHandler Instance;
-
-        private void Awake() => Instance = this;
-
+        public int passedPipes;
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Pipe")) SceneManager.LoadScene(0);
+            if (other.CompareTag("Pipe")) Destroy(gameObject);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("PipeTrigger")) PipeSpawner.Instance.activePipes.RemoveAt(0);
+            if (other.CompareTag("PipeTrigger")) passedPipes++;
         }
     }
 }

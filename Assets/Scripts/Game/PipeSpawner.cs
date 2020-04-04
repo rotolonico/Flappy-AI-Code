@@ -18,6 +18,11 @@ namespace Game
 
         private void Awake() => Instance = this;
 
+        private void Start()
+        {
+            for (var i = 0; i < 5; i++) SpawnPipe(spawnedPipes * Settings.Instance.pipeDistance, RandomnessHandler.RandomIntMinMax(1, Settings.Instance.height - 3));
+        }
+
         private void Update()
         {
             if (delay > Settings.Instance.pipeDistance - 0.5f)
@@ -38,7 +43,7 @@ namespace Game
 
         private void SpawnComponent(int x, int y, bool complementary)
         {
-            var newPipe = Instantiate(pipe, transform.position, Quaternion.identity).GetComponent<PipeHandler>();
+            var newPipe = Instantiate(pipe, Vector3.zero, Quaternion.identity).GetComponent<PipeHandler>();
             newPipe.x = x;
             newPipe.y = complementary ? Settings.Instance.height - 3 - y : y;
             newPipe.complementary = complementary;

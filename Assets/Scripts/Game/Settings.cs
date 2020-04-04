@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -12,5 +13,10 @@ namespace Game
         public int pipeDistance;
         
         private void Awake() => Instance = this;
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(0);
+        }
     }
 }
