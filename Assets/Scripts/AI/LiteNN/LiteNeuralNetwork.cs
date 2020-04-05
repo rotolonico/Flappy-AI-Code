@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AI.NEAT;
+using AI.NEAT.Genes;
 using UnityEngine;
 using Utils;
 
@@ -19,7 +21,32 @@ namespace AI.LiteNN
 
         private const float WeightDecay = 0.001f;
 
-        public LiteNeuralNetwork(int inputs, IReadOnlyList<int> hiddenLayers, int outputs)
+        public LiteNeuralNetwork(int inputs, IReadOnlyList<int> hiddenLayers, int outputs) =>
+            InitializeNetwork(inputs, hiddenLayers, outputs, true);
+
+        public LiteNeuralNetwork(int inputs, Genome genome, int outputs)
+        {
+            var possibleDistances = new Dictionary<float, int>();
+            foreach (var node in genome.Nodes.Values.Where(node => node.Type == NodeGene.TypeE.Hidden))
+            {
+                if (possibleDistances.ContainsKey(node.X)) possibleDistances[node.X]++;
+                else possibleDistances[node.X] = 1;
+            }
+
+            var sortedDistances = possibleDistances.Keys.ToList();
+            sortedDistances.Sort();
+            var hiddenLayers = sortedDistances.Select(t => possibleDistances[t]).ToList();
+
+            InitializeNetwork(inputs, hiddenLayers, outputs, false);
+
+            foreach (var connection in genome.Connections.Values.Where(c => c.Expressed))
+            {
+                weights[genome.Nodes[connection.InNode].X][genome.Nodes[connection.OutNode].Y][
+                    genome.Nodes[connection.InNode].Y] = connection.Weight;
+            }
+        }
+
+        private void InitializeNetwork(int inputs, IReadOnlyList<int> hiddenLayers, int outputs, bool initializeParams)
         {
             values = new float[1 + hiddenLayers.Count + 1][];
             desiredValues = new float[1 + hiddenLayers.Count + 1][];
@@ -45,6 +72,7 @@ namespace AI.LiteNN
                 {
                     weights[i][j] = new float[values[i].Length];
                     weightsSmudge[i][j] = new float[values[i].Length];
+                    if (!initializeParams) continue;
                     for (var k = 0; k < weights[i][j].Length; k++)
                         weights[i][j][k] = RandomnessHandler.RandomZeroToOne();
                 }
@@ -60,6 +88,7 @@ namespace AI.LiteNN
             {
                 weights[hiddenLayers.Count][j] = new float[values[hiddenLayers.Count].Length];
                 weightsSmudge[hiddenLayers.Count][j] = new float[values[hiddenLayers.Count].Length];
+                if (!initializeParams) continue;
                 for (var k = 0; k < weights[hiddenLayers.Count][j].Length; k++)
                     weights[hiddenLayers.Count][j][k] = RandomnessHandler.RandomZeroToOne();
             }
@@ -117,13 +146,13 @@ namespace AI.LiteNN
                 for (var j = 0; j < values[i].Length; j++)
                 {
                     biases[i][j] += biasesSmudge[i][j];
-                    //biases[i][j] *= 1 - WeightDecay;
+                    biases[i][j] *= 1 - WeightDecay;
                     biasesSmudge[i][j] = 0;
 
                     for (var k = 0; k < values[i - 1].Length; k++)
                     {
                         weights[i - 1][j][k] += weightsSmudge[i - 1][j][k];
-                        //weights[i - 1][j][k] *= 1 - WeightDecay;
+                        weights[i - 1][j][k] *= 1 - WeightDecay;
                         weightsSmudge[i - 1][j][k] = 0;
                     }
 

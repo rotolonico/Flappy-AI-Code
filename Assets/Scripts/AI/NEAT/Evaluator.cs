@@ -1,32 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AI.NEAT.Genes;
+using Game;
 using Utils;
 using Random = UnityEngine.Random;
 
 namespace AI.NEAT
 {
-    public abstract class Evaluator
+    public class Evaluator
     {
+        private int populationSize;
         private Counter nodeInnovation;
         private Counter connectionInnovation;
+        private Func<Genome, float> fitnessFunction;
 
         private const float C1 = 1.0f;
         private const float C2 = 1.0f;
         private const float C3 = 0.4f;
         private const float DT = 10.0f;
-        private const float MutationRate = 0.5f;
+        private const float WeightMutationRate = 0.5f;
         private const float AddConnectionRate = 0.1f;
         private const float AddNodeRate = 0.1f;
         private const int ConnectionMutationMaxAttempts = 10;
 
-        private int populationSize;
 
-        private List<GenomeInfo> genomes = new List<GenomeInfo>();
+        public List<GenomeWrapper> genomes = new List<GenomeWrapper>();
         private List<Species> species = new List<Species>();
+
+        private float highestScore;
+        private GenomeWrapper fittestGenome;
+
+        public Evaluator(int populationSize, Counter nodeInnovation,
+            Counter connectionInnovation, Func<Genome, float> fitnessFunction)
+        {
+            this.populationSize = populationSize;
+            this.nodeInnovation = nodeInnovation;
+            this.connectionInnovation = connectionInnovation;
+
+            var inputGenes = new Dictionary<int, NodeGene>();
+            var outputGenes = new Dictionary<int, NodeGene>();
+            for (var i = 0; i < Settings.Instance.inputs; i++)
+            {
+                var newNodeInnovation = nodeInnovation.GetInnovation();
+                inputGenes.Add(newNodeInnovation, new NodeGene(NodeGene.TypeE.Input, newNodeInnovation, 0, i));
+            }
+
+            for (var i = 0; i < Settings.Instance.outputs; i++)
+            {
+                var newNodeInnovation = nodeInnovation.GetInnovation();
+                outputGenes.Add(newNodeInnovation, new NodeGene(NodeGene.TypeE.Output, newNodeInnovation, 1, i));
+            }
+
+            var connectionGenes = new Dictionary<int, ConnectionGene>();
+            foreach (var inputGene in inputGenes)
+            {
+                foreach (var outputGene in outputGenes)
+                {
+                    var newConnectionInnovation = connectionInnovation.GetInnovation();
+                    connectionGenes.Add(newConnectionInnovation,
+                        new ConnectionGene(inputGenes.FirstOrDefault(x => x.Value == inputGene.Value).Key,
+                            outputGenes.FirstOrDefault(x => x.Value == outputGene.Value).Key, 0, true,
+                            newConnectionInnovation));
+                }
+            }
+
+            var nodeGenes = new Dictionary<int, NodeGene>(inputGenes);
+            outputGenes.ToList().ForEach(x => nodeGenes.Add(x.Key, x.Value));
+
+            var startingGenome = new Genome(nodeGenes, connectionGenes);
+            for (var i = 0; i < populationSize; i++) genomes.Add(new GenomeWrapper(new Genome(startingGenome)));
+            this.fitnessFunction = fitnessFunction;
+        }
 
         public void Evaluate()
         {
+            foreach (var s in species) s.Reset();
+            highestScore = float.MinValue;
+            fittestGenome = null;
+
             foreach (var g in genomes)
             {
                 var foundSpecies = false;
@@ -45,14 +97,21 @@ namespace AI.NEAT
                 g.Species = newSpecies;
 
                 var score = EvaluateGenome(g.Genome);
-                var adjustedScore = score / g.Species.Members.Count;
-                g.Fitness = adjustedScore;
+                g.Fitness = score;
+
+                if (!(highestScore < score)) continue;
+                highestScore = score;
+                fittestGenome = g;
             }
+
+            species.RemoveAll(s => s.Members.Count == 0);
 
             genomes.Clear();
 
             foreach (var speciesFitness in species.Select(s => s.CalculateSpeciesFitness()))
+            {
                 genomes.Add(speciesFitness.BestMember);
+            }
 
             while (genomes.Count < populationSize)
             {
@@ -66,11 +125,13 @@ namespace AI.NEAT
 
                 var child = Genome.Crossover(mostFitParent, leastFitParent);
 
-                if (RandomnessHandler.RandomZeroToOne() < MutationRate) child.Mutation();
-                if (RandomnessHandler.RandomZeroToOne() < AddConnectionRate) child.AddConnectionMutation(connectionInnovation, ConnectionMutationMaxAttempts);
-                if (RandomnessHandler.RandomZeroToOne() < AddNodeRate) child.AddNodeMutation(nodeInnovation, connectionInnovation);
-                
-                genomes.Add(new GenomeInfo(child));
+                if (RandomnessHandler.RandomZeroToOne() < WeightMutationRate) child.WeightMutation();
+                if (RandomnessHandler.RandomZeroToOne() < AddConnectionRate)
+                    child.AddConnectionMutation(connectionInnovation, ConnectionMutationMaxAttempts);
+                if (RandomnessHandler.RandomZeroToOne() < AddNodeRate)
+                    child.AddNodeMutation(nodeInnovation, connectionInnovation);
+
+                genomes.Add(new GenomeWrapper(child));
             }
         }
 
@@ -90,7 +151,7 @@ namespace AI.NEAT
             return null;
         }
 
-        private GenomeInfo GetRandomGenomeInSpecies(Species selectedSpecies)
+        private GenomeWrapper GetRandomGenomeInSpecies(Species selectedSpecies)
         {
             var totalFitness = selectedSpecies.Members.Sum(s => s.Fitness);
             var speciesIndex = RandomnessHandler.RandomZeroToOne() * totalFitness;
@@ -106,6 +167,6 @@ namespace AI.NEAT
             return null;
         }
 
-        public abstract float EvaluateGenome(Genome genome);
+        private float EvaluateGenome(Genome genome) => fitnessFunction.Invoke(genome);
     }
 }

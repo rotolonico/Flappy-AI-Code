@@ -19,12 +19,12 @@
                 <e p="NodeGene.cs" t="Include" />
               </e>
               <e p="Genome.cs" t="Include" />
-              <e p="GenomeInfo.cs" t="Include" />
+              <e p="GenomeWrapper.cs" t="Include" />
               <e p="GenomesGenesInfo.cs" t="Include" />
               <e p="Species.cs" t="Include" />
               <e p="SpeciesFitness.cs" t="Include" />
             </e>
-            <e p="Population.cs" t="Include" />
+            <e p="NEATInitializer.cs" t="Include" />
           </e>
           <e p="Game" t="Include">
             <e p="FlappyController.cs" t="Include" />

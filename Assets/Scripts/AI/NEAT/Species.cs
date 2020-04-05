@@ -6,14 +6,14 @@ namespace AI.NEAT
 {
     public class Species
     {
-        public GenomeInfo Mascot;
-        public List<GenomeInfo> Members;
+        public GenomeWrapper Mascot;
+        public List<GenomeWrapper> Members;
         public SpeciesFitness LastCalculatedFitness;
 
-        public Species(GenomeInfo mascot)
+        public Species(GenomeWrapper mascot)
         {
             Mascot = mascot;
-            Members = new List<GenomeInfo> {mascot};
+            Members = new List<GenomeWrapper> {mascot};
         }
 
         public SpeciesFitness CalculateSpeciesFitness()

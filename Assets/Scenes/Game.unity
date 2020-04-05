@@ -183,6 +183,8 @@ MonoBehaviour:
   gameSpeed: 3
   height: 10
   pipeDistance: 5
+  inputs: 2
+  outputs: 2
 --- !u!114 &125136705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +200,6 @@ MonoBehaviour:
   flappyAI: {fileID: 7048830099750248287, guid: ddd6a01a4d411e665b1d2c99b375ca97,
     type: 3}
   populationSize: 50
-  networks: []
 --- !u!1 &182497804 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7877327368361914353, guid: 475f4bd8614d158839ed635d1308c99c,

@@ -3,10 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="21ddc8e4-cec9-47e0-89fe-9661b549e000" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/ConnectionGene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/ConnectionGene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/LiteNN/LiteNeuralNetwork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/LiteNN/LiteNeuralNetwork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/NodeGene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/NodeGene.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/RandomnessHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/RandomnessHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeWrapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeInfo.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeWrapper.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Species.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Species.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/SpeciesFitness.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/SpeciesFitness.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/Population.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEATInitializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/Population.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEATInitializer.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Settings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Settings.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,12 +38,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utils/BasicFunctions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/RightForce.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/NEATInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9D9CA785-E8F7-437C-82B3-2EC20364DFA1/e7/7b7d9552/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Settings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/IO/InputsRetriever.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomesGenesInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/PipeSpawner.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/LiteNN/LiteNeuralNetwork.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/NodeGene.cs" root0="FORCE_HIGHLIGHTING" />
@@ -46,13 +58,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/PipeHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Utils/BasicFunctions.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/FlappyHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Settings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/IO/InputsRetriever.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/PipeSpawner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/Population.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/LiteNN/LiteNeuralNetwork.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/NodeGene.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/ConnectionGene.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Utils/RandomnessHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/InnovationGenerator.cs" />
@@ -62,9 +69,16 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomesGenesInfo.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/SpeciesFitness.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Species.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/Population.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/NodeGene.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeInfo.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeWrapper.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Settings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/LiteNN/LiteNeuralNetwork.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEATInitializer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" />
       </list>
     </option>
   </component>
@@ -123,7 +137,8 @@
       <workItem from="1585925412877" duration="9012000" />
       <workItem from="1585993396261" duration="5376000" />
       <workItem from="1586016625556" duration="5822000" />
-      <workItem from="1586077511793" duration="9352000" />
+      <workItem from="1586077511793" duration="9601000" />
+      <workItem from="1586099768696" duration="8256000" />
     </task>
     <servers />
   </component>

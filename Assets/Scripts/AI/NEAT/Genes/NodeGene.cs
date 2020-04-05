@@ -13,14 +13,18 @@ namespace AI.NEAT.Genes
         }
 
         public TypeE Type { get;}
-        public int Id { get;}
+        public int Innovation { get;}
+        public int X { get; }
+        public int Y { get; }
         
-        public NodeGene(TypeE type, int id)
+        public NodeGene(TypeE type, int innovation, int x, int y)
         {
             Type = type;
-            Id = id;
+            Innovation = innovation;
+            X = x;
+            Y = y;
         }
 
-        public NodeGene Copy() => new NodeGene(Type, Id);
+        public NodeGene Copy() => new NodeGene(Type, Innovation, X, Y);
     }
 }
