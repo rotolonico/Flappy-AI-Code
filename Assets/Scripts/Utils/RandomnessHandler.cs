@@ -13,6 +13,6 @@ namespace Utils
         
         public static int RandomIntMinMax(int min, int max) => Random.Next(max - min) + min;
         
-        public static bool RandomBool() => Random.NextDouble() >= 0.5
+        public static bool RandomBool() => Random.NextDouble() >= 0.5;
     }
 }

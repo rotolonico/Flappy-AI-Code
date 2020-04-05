@@ -7,7 +7,7 @@ namespace AI.NEAT.Genes
     {
         public int InNode { get; }
         public int OutNode { get; }
-        public float Weight { get; }
+        public float Weight { get; set; }
         public bool Expressed { get; private set; }
         public int Innovation { get; }
 
