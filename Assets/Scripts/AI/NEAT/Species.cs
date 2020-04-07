@@ -19,7 +19,7 @@ namespace AI.NEAT
         public SpeciesFitness CalculateSpeciesFitness()
         {
             float fitness = 0;
-            var bestMember = Mascot;
+            var bestMember = LastCalculatedFitness == null ? Mascot : LastCalculatedFitness.BestMember;
             
             foreach (var m in Members)
             {

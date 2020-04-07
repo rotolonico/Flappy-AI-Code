@@ -11,17 +11,14 @@ namespace Game
         
         public Transform pipe;
 
-        public List<PipeHandler> activePipes = new List<PipeHandler>();
+        public List<PipeHandler> pipes = new List<PipeHandler>();
         
         private float delay;
         private int spawnedPipes;
 
         private void Awake() => Instance = this;
 
-        private void Start()
-        {
-            for (var i = 0; i < 5; i++) SpawnPipe(spawnedPipes * Settings.Instance.pipeDistance, RandomnessHandler.RandomIntMinMax(1, Settings.Instance.height - 3));
-        }
+        private void Start() => Reset();
 
         private void Update()
         {
@@ -47,7 +44,16 @@ namespace Game
             newPipe.x = x;
             newPipe.y = complementary ? Settings.Instance.height - 3 - y : y;
             newPipe.complementary = complementary;
-            if (!complementary) activePipes.Add(newPipe);
+            if (!complementary) pipes.Add(newPipe);
+        }
+
+        public void Reset()
+        {
+            spawnedPipes = 0;
+            foreach (var pipeToDestroy in GameObject.FindGameObjectsWithTag("Pipe")) Destroy(pipeToDestroy);
+            pipes.Clear();
+            delay = 0;
+            for (var i = 0; i < 5; i++) SpawnPipe(spawnedPipes * Settings.Instance.pipeDistance, RandomnessHandler.RandomIntMinMax(1, Settings.Instance.height - 3));
         }
     }
 }

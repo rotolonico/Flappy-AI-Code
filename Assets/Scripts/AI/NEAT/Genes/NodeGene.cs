@@ -14,10 +14,10 @@ namespace AI.NEAT.Genes
 
         public TypeE Type { get;}
         public int Innovation { get;}
-        public int X { get; }
+        public float X { get; }
         public int Y { get; }
         
-        public NodeGene(TypeE type, int innovation, int x, int y)
+        public NodeGene(TypeE type, int innovation, float x, int y)
         {
             Type = type;
             Innovation = innovation;

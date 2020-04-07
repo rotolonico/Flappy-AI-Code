@@ -7,6 +7,7 @@ TagManager:
   - Pipe
   - PipeTrigger
   - Flappy
+  - StaticPipe
   layers:
   - Default
   - TransparentFX

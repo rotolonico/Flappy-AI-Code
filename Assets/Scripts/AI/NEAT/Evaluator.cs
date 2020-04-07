@@ -4,39 +4,34 @@ using System.Linq;
 using AI.NEAT.Genes;
 using Game;
 using Utils;
-using Random = UnityEngine.Random;
 
 namespace AI.NEAT
 {
     public class Evaluator
     {
-        private int populationSize;
-        private Counter nodeInnovation;
-        private Counter connectionInnovation;
-        private Func<Genome, float> fitnessFunction;
+        private readonly int populationSize;
+        private readonly Func<Genome, float> fitnessFunction;
 
         private const float C1 = 1.0f;
         private const float C2 = 1.0f;
         private const float C3 = 0.4f;
-        private const float DT = 10.0f;
+        private const float DT = 3.0f;
         private const float WeightMutationRate = 0.5f;
         private const float AddConnectionRate = 0.1f;
         private const float AddNodeRate = 0.1f;
         private const int ConnectionMutationMaxAttempts = 10;
 
 
-        public List<GenomeWrapper> genomes = new List<GenomeWrapper>();
-        private List<Species> species = new List<Species>();
+        public List<GenomeWrapper> Genomes = new List<GenomeWrapper>();
+        private readonly List<Species> species = new List<Species>();
 
-        private float highestScore;
-        private GenomeWrapper fittestGenome;
+        public float HighestScore;
+        public GenomeWrapper FittestGenome;
 
         public Evaluator(int populationSize, Counter nodeInnovation,
             Counter connectionInnovation, Func<Genome, float> fitnessFunction)
         {
             this.populationSize = populationSize;
-            this.nodeInnovation = nodeInnovation;
-            this.connectionInnovation = connectionInnovation;
 
             var inputGenes = new Dictionary<int, NodeGene>();
             var outputGenes = new Dictionary<int, NodeGene>();
@@ -60,7 +55,7 @@ namespace AI.NEAT
                     var newConnectionInnovation = connectionInnovation.GetInnovation();
                     connectionGenes.Add(newConnectionInnovation,
                         new ConnectionGene(inputGenes.FirstOrDefault(x => x.Value == inputGene.Value).Key,
-                            outputGenes.FirstOrDefault(x => x.Value == outputGene.Value).Key, 0, true,
+                            outputGenes.FirstOrDefault(x => x.Value == outputGene.Value).Key, RandomnessHandler.RandomZeroToOne() * 4 - 2, true,
                             newConnectionInnovation));
                 }
             }
@@ -69,17 +64,17 @@ namespace AI.NEAT
             outputGenes.ToList().ForEach(x => nodeGenes.Add(x.Key, x.Value));
 
             var startingGenome = new Genome(nodeGenes, connectionGenes);
-            for (var i = 0; i < populationSize; i++) genomes.Add(new GenomeWrapper(new Genome(startingGenome)));
+            for (var i = 0; i < populationSize; i++) Genomes.Add(new GenomeWrapper(new Genome(startingGenome)));
             this.fitnessFunction = fitnessFunction;
         }
 
         public void Evaluate()
         {
             foreach (var s in species) s.Reset();
-            highestScore = float.MinValue;
-            fittestGenome = null;
+            HighestScore = float.MinValue;
+            FittestGenome = null;
 
-            foreach (var g in genomes)
+            foreach (var g in Genomes)
             {
                 var foundSpecies = false;
                 foreach (var s in species.Where(
@@ -91,32 +86,35 @@ namespace AI.NEAT
                     break;
                 }
 
-                if (foundSpecies) continue;
-                var newSpecies = new Species(g);
-                species.Add(newSpecies);
-                g.Species = newSpecies;
+                if (!foundSpecies)
+                {
+                    var newSpecies = new Species(g);
+                    species.Add(newSpecies);
+                    g.Species = newSpecies;
+                }
 
-                var score = EvaluateGenome(g.Genome);
+                //TODO change this
+                var score = g.Fitness;
                 g.Fitness = score;
-
-                if (!(highestScore < score)) continue;
-                highestScore = score;
-                fittestGenome = g;
+                g.Best = false;
+                
+                if (!(HighestScore < score)) continue;
+                HighestScore = score;
+                FittestGenome = g;
+                g.Best = true;
             }
 
             species.RemoveAll(s => s.Members.Count == 0);
 
-            genomes.Clear();
+            Genomes.Clear();
 
             foreach (var speciesFitness in species.Select(s => s.CalculateSpeciesFitness()))
-            {
-                genomes.Add(speciesFitness.BestMember);
-            }
+                Genomes.Add(speciesFitness.BestMember);
 
-            while (genomes.Count < populationSize)
+            while (Genomes.Count < populationSize)
             {
                 var s = GetRandomSpecies();
-
+                
                 var p1 = GetRandomGenomeInSpecies(s);
                 var p2 = GetRandomGenomeInSpecies(s);
 
@@ -127,11 +125,11 @@ namespace AI.NEAT
 
                 if (RandomnessHandler.RandomZeroToOne() < WeightMutationRate) child.WeightMutation();
                 if (RandomnessHandler.RandomZeroToOne() < AddConnectionRate)
-                    child.AddConnectionMutation(connectionInnovation, ConnectionMutationMaxAttempts);
+                    child.AddConnectionMutation(ConnectionMutationMaxAttempts);
                 if (RandomnessHandler.RandomZeroToOne() < AddNodeRate)
-                    child.AddNodeMutation(nodeInnovation, connectionInnovation);
+                    child.AddNodeMutation();
 
-                genomes.Add(new GenomeWrapper(child));
+                Genomes.Add(new GenomeWrapper(child));
             }
         }
 
@@ -153,15 +151,15 @@ namespace AI.NEAT
 
         private GenomeWrapper GetRandomGenomeInSpecies(Species selectedSpecies)
         {
-            var totalFitness = selectedSpecies.Members.Sum(s => s.Fitness);
+            var totalFitness = selectedSpecies.Members.Sum(g => g.Fitness);
             var speciesIndex = RandomnessHandler.RandomZeroToOne() * totalFitness;
             var currentFitness = 0f;
 
-            foreach (var s in selectedSpecies.Members)
+            foreach (var g in selectedSpecies.Members)
             {
-                currentFitness += s.Fitness;
+                currentFitness += g.Fitness;
                 if (currentFitness >= speciesIndex)
-                    return s;
+                    return g;
             }
 
             return null;

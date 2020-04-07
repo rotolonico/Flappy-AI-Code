@@ -36,12 +36,14 @@ namespace AI.LiteNN
             var sortedDistances = possibleDistances.Keys.ToList();
             sortedDistances.Sort();
             var hiddenLayers = sortedDistances.Select(t => possibleDistances[t]).ToList();
+            sortedDistances.Insert(0, 0);
+            sortedDistances.Add(1);
 
             InitializeNetwork(inputs, hiddenLayers, outputs, false);
 
             foreach (var connection in genome.Connections.Values.Where(c => c.Expressed))
             {
-                weights[genome.Nodes[connection.InNode].X][genome.Nodes[connection.OutNode].Y][
+                weights[sortedDistances.IndexOf(genome.Nodes[connection.InNode].X)][genome.Nodes[connection.OutNode].Y][
                     genome.Nodes[connection.InNode].Y] = connection.Weight;
             }
         }

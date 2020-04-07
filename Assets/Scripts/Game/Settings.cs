@@ -14,13 +14,9 @@ namespace Game
         public int pipeDistance;
         public int inputs;
         public int outputs;
-        
-        private void Awake() => Instance = this;
+        public bool normalInput;
+        public bool randomizePipes;
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(0);
-            if (Input.GetKeyDown(KeyCode.E)) NEATInitializer.Instance.evaluator.Evaluate();
-        }
+        private void Awake() => Instance = this;
     }
 }
