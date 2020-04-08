@@ -7,7 +7,8 @@ namespace Game
         public float x;
         public float y;
         public bool complementary;
-    
+        public PipeHandler complementaryPipe;
+
         private void Start()
         {
             transform.position = new Vector3(x, (Settings.Instance.height - y) / 2 * (complementary ? 1 : -1));

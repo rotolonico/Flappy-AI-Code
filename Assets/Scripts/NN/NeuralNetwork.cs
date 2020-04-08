@@ -45,7 +45,6 @@ namespace NN
                     .Select(c => c.Value.InNode).ToArray();
                 foreach (var inNode in inNodes)
                 {
-                    if (node.Value.weights.ContainsKey(GenomeNodes[inNode])) continue;
                     node.Value.weights.Add(GenomeNodes[inNode],
                         RandomnessHandler.RandomZeroToOne() * Mathf.Sqrt(2f / inNodes.Length));
                 }

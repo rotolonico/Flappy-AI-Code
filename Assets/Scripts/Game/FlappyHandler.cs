@@ -9,9 +9,9 @@ namespace Game
         public int passedPipes;
         private bool isAlive = true;
 
-        private FlappyController flappyController;
+        public FlappyController flappyController;
 
-        private void Start() => flappyController = GetComponent<FlappyController>();
+        private void Awake() => flappyController = GetComponent<FlappyController>();
 
         private void OnTriggerEnter2D(Collider2D other)
         {

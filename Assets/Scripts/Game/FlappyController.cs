@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using AI.LiteNN;
 using AI.NEAT;
 using IO;
 using NN;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -18,65 +16,25 @@ namespace Game
 
         public bool player;
 
-        private float networkDelay;
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow)) Jump();
+            var inputs = InputsRetriever.GetInputs(handler);
+            //Debug.Log(inputs[0] + " " + inputs[1] + " " + inputs[2] + " ");
+        }
 
         private void FixedUpdate()
         {
-            if (player)
-            {
-                if (Input.GetKeyDown(KeyCode.UpArrow)) Jump();
-                else if (Input.GetKeyDown(KeyCode.DownArrow)) Down();
-            }
-            else
-            {
-                networkDelay += Time.deltaTime;
-                //if (networkDelay < 0.2f) return;
-                aliveTime++;
-                networkDelay = 0;
-                var inputs = InputsRetriever.GetInputs(handler);
-                var outputs = NetworkCalculator.TestNetworkGenome(genome.Network, inputs);
-                if (Settings.Instance.outputs == 3)
-                {
-                    var action = Array.IndexOf(outputs, outputs.Max());
-                    switch (action)
-                    {
-                        case 0:
-                            Jump();
-                            break;
-                        case 1:
-                            Down();
-                            break;
-                    }
-                }
-                else
-                {
-                    if (outputs[0] > outputs[1]) Jump();
-                }
-            }
+            if (player) return;
+            aliveTime++;
+            var inputs = InputsRetriever.GetInputs(handler);
+            var outputs = NetworkCalculator.TestNetworkGenome(genome.Network, inputs);
+            if (outputs[0] > outputs[1]) Jump();
         }
 
         private void Jump()
         {
-            if (Settings.Instance.normalInput)
-                rb.AddForce(player ? new Vector2(0, 300) : new Vector2(0, 60));
-            else
-            {
-                var position = transform.position;
-                position = new Vector3(position.x, position.y + 1, 0);
-                transform.position = position;
-            }
-        }
-
-        private void Down()
-        {
-            if (Settings.Instance.normalInput)
-                rb.AddForce(player ? new Vector2(0, 300) : new Vector2(0, -60));
-            else
-            {
-                var position = transform.position;
-                position = new Vector3(position.x, position.y - 1, 0);
-                transform.position = position;
-            }
+            rb.AddForce(player ? new Vector2(0, 300) : new Vector2(0, 60));
         }
     }
 }

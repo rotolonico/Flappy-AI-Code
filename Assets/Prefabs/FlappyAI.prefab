@@ -98,6 +98,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5534816446552151457, guid: 3341b32232d424d849111bac5c718ed4,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5534816446552151460, guid: 3341b32232d424d849111bac5c718ed4,
         type: 3}
       propertyPath: player

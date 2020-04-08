@@ -11,6 +11,9 @@ namespace AI.NEAT
     {
         private readonly int populationSize;
         private readonly Func<Genome, float> fitnessFunction;
+        
+        private readonly Counter nodeInnovation;
+        private readonly Counter connectionInnovation;
 
         private const float C1 = 1.0f;
         private const float C2 = 1.0f;
@@ -23,7 +26,7 @@ namespace AI.NEAT
 
 
         public List<GenomeWrapper> Genomes = new List<GenomeWrapper>();
-        private readonly List<Species> species = new List<Species>();
+        public readonly List<Species> species = new List<Species>();
 
         public float HighestScore;
         public GenomeWrapper FittestGenome;
@@ -32,6 +35,8 @@ namespace AI.NEAT
             Counter connectionInnovation, Func<Genome, float> fitnessFunction)
         {
             this.populationSize = populationSize;
+            this.nodeInnovation = nodeInnovation;
+            this.connectionInnovation = connectionInnovation;
 
             var inputGenes = new Dictionary<int, NodeGene>();
             var outputGenes = new Dictionary<int, NodeGene>();
@@ -125,9 +130,9 @@ namespace AI.NEAT
 
                 if (RandomnessHandler.RandomZeroToOne() < WeightMutationRate) child.WeightMutation();
                 if (RandomnessHandler.RandomZeroToOne() < AddConnectionRate)
-                    child.AddConnectionMutation(ConnectionMutationMaxAttempts);
+                    child.AddConnectionMutation(connectionInnovation, ConnectionMutationMaxAttempts);
                 if (RandomnessHandler.RandomZeroToOne() < AddNodeRate)
-                    child.AddNodeMutation();
+                    child.AddNodeMutation(nodeInnovation, connectionInnovation);
 
                 Genomes.Add(new GenomeWrapper(child));
             }

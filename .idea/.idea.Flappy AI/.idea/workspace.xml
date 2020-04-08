@@ -2,29 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21ddc8e4-cec9-47e0-89fe-9661b549e000" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEATHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Flappy AI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Flappy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Flappy.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/FlappyAI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/FlappyAI.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Pipe.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Pipe.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/LiteNN/LiteNeuralNetwork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/LiteNN/LiteNeuralNetwork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Counter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Counter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/NodeGene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/NodeGene.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeWrapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Species.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Species.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEATInitializer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/NEATInitializer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/NEATHandler.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/FlappyHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/FlappyHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/PipeHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/PipeHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/PipeSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/PipeSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Settings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Settings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/IO/InputsRetriever.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/IO/InputsRetriever.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NN/NeuralNetwork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NN/NeuralNetwork.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,9 +73,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/RightForce.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/PipeHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Utils/BasicFunctions.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/IO/InputsRetriever.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/ConnectionGene.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Utils/RandomnessHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/InnovationGenerator.cs" />
@@ -100,22 +87,24 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEATInitializer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/LiteNN/LiteNeuralNetwork.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genes/NodeGene.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/PipeSpawner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/NNUtils/NetworkStorage.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Species.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/GenomeWrapper.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/NN/Node.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/NN/NetworkCalculator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Counter.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/NN/NeuralNetwork.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEATFlappyHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEATHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Settings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/NN/NeuralNetwork.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Evaluator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/NEATHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/FlappyHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/PipeHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/PipeSpawner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/FlappyController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/IO/InputsRetriever.cs" />
       </list>
     </option>
   </component>
@@ -153,10 +142,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="13306">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="4522">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="13306" />
+      <option name="pid" value="4522" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -179,6 +168,8 @@
       <workItem from="1586180901755" duration="10470000" />
       <workItem from="1586258291808" duration="3400000" />
       <workItem from="1586269297293" duration="10957000" />
+      <workItem from="1586354179611" duration="5862000" />
+      <workItem from="1586370331178" duration="3090000" />
     </task>
     <servers />
   </component>
@@ -210,101 +201,6 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs</url>
-          <line>47</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" initialLine="48">
-            <startOffsets>
-              <option value="1764" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1863" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/NN/Node.cs</url>
-          <line>75</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/NN/Node.cs" initialLine="75">
-            <startOffsets>
-              <option value="2312" />
-              <option value="2368" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2419" />
-              <option value="2410" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/NN/Node.cs</url>
-          <line>76</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/NN/Node.cs" initialLine="76">
-            <startOffsets>
-              <option value="2432" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2496" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/NN/Node.cs</url>
-          <line>73</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/NN/Node.cs" initialLine="73">
-            <startOffsets>
-              <option value="2264" />
-              <option value="2285" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2284" />
-              <option value="2298" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/NN/Node.cs</url>
-          <line>77</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/NN/Node.cs" initialLine="77">
-            <startOffsets>
-              <option value="2509" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2530" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/NN/Node.cs</url>
-          <line>78</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/NN/Node.cs" initialLine="78">
-            <startOffsets>
-              <option value="2543" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2566" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs</url>
-          <line>89</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/AI/NEAT/Genome.cs" initialLine="89">
-            <startOffsets>
-              <option value="3533" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3612" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <reveal-manager>

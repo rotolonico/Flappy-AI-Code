@@ -16,9 +16,6 @@ namespace AI.NEAT
         public Dictionary<int, NodeGene> Nodes;
         public Dictionary<int, ConnectionGene> Connections;
 
-        private Counter nodeInnovation;
-        private Counter connectionInnovation = new Counter(Settings.Instance.inputs * Settings.Instance.outputs);
-
         public Genome() => InitializeGenome(new Dictionary<int, NodeGene>(), new Dictionary<int, ConnectionGene>());
 
         public Genome(Dictionary<int, NodeGene> nodes, Dictionary<int, ConnectionGene> connections) =>
@@ -30,20 +27,15 @@ namespace AI.NEAT
 
             foreach (var node in toBeCopied.Nodes) Nodes[node.Key] = node.Value.Copy();
             foreach (var connection in toBeCopied.Connections) Connections[connection.Key] = connection.Value.Copy();
-            
-            nodeInnovation = toBeCopied.nodeInnovation;
-            connectionInnovation = toBeCopied.connectionInnovation;
         }
 
         private void InitializeGenome(Dictionary<int, NodeGene> nodes, Dictionary<int, ConnectionGene> connections)
         {
             Nodes = nodes;
             Connections = connections;
-            nodeInnovation = new Counter(Settings.Instance.inputs + Settings.Instance.outputs);
-            connectionInnovation = new Counter(Settings.Instance.inputs * Settings.Instance.outputs);
         }
 
-        public void AddNodeMutation()
+        public void AddNodeMutation(Counter nodeInnovation, Counter connectionInnovation)
         {
             var oldConnection = Connections.Values.ToArray()[RandomnessHandler.Random.Next(Connections.Count)];
             var inNode = Nodes[oldConnection.InNode];
@@ -51,25 +43,13 @@ namespace AI.NEAT
 
             oldConnection.Disable();
 
-            var newNodeInnovation = 0;
-            while (Nodes.ContainsKey(newNodeInnovation))
-                newNodeInnovation++;
-            
-            var newConnectionInnovation = 0;
-            while (Connections.ContainsKey(newConnectionInnovation))
-                newConnectionInnovation++;
-            
-            var newConnectionInnovation2 = newConnectionInnovation + 1;
-            while (Connections.ContainsKey(newConnectionInnovation2))
-                newConnectionInnovation2++;
-
             var newNodeX = (inNode.X + outNode.X) / 2f;
-            var newNode = new NodeGene(NodeGene.TypeE.Hidden, newNodeInnovation, newNodeX,
+            var newNode = new NodeGene(NodeGene.TypeE.Hidden, nodeInnovation.GetInnovation(), newNodeX,
                 Nodes.Count(n => Math.Abs(n.Value.X - newNodeX) < 0.001f));
             var inToNew = new ConnectionGene(inNode.Innovation, newNode.Innovation, 1, true,
-                newConnectionInnovation);
+                connectionInnovation.GetInnovation());
             var newToOut = new ConnectionGene(newNode.Innovation, outNode.Innovation, oldConnection.Weight, true,
-                newConnectionInnovation2);
+                connectionInnovation.GetInnovation());
 
             Nodes.Add(newNode.Innovation, newNode);
             Connections.Add(inToNew.Innovation, inToNew);
@@ -78,7 +58,7 @@ namespace AI.NEAT
             //Debug.Log("Node mutation");
         }
 
-        public void AddConnectionMutation(int maxAttempts)
+        public void AddConnectionMutation(Counter connectionInnovation, int maxAttempts)
         {
             var currentAttempt = 0;
             var success = false;
@@ -112,14 +92,10 @@ namespace AI.NEAT
                 }
 
                 if (connectionExists) continue;
-                
-                var newConnectionInnovation = 0;
-                while (Connections.ContainsKey(newConnectionInnovation))
-                    newConnectionInnovation++;
 
                 var newConnection = new ConnectionGene(reversed ? node2.Innovation : node1.Innovation,
                     reversed ? node1.Innovation : node2.Innovation,
-                    weight, true, newConnectionInnovation);
+                    weight, true, connectionInnovation.GetInnovation());
                 Connections.Add(newConnection.Innovation, newConnection);
 
                 success = true;
@@ -215,12 +191,12 @@ namespace AI.NEAT
         // parent1 should be the most fit parent
         public static Genome Crossover(Genome parent1, Genome parent2)
         {
-            var child = new Genome(parent1);
-            return child;
+            var child = new Genome();
+            
             foreach (var node in parent1.Nodes.Values) child.Nodes.Add(node.Innovation, node.Copy());
             foreach (var connection1 in parent1.Connections.Values)
             {
-                if (parent2.Connections.TryGetValue(connection1.Innovation, out var connection2))
+                if (parent2.Connections.TryGetValue(connection1.Innovation, out var connection2) && connection2.Expressed)
                 {
                     var childConnectionGene = RandomnessHandler.RandomBool() ? connection1 : connection2;
                     child.Connections.Add(childConnectionGene.Innovation, childConnectionGene);

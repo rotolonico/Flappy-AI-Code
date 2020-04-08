@@ -33,18 +33,19 @@ namespace Game
 
         private void SpawnPipe(int x, int y)
         {
-            SpawnComponent(x, y, false);
-            SpawnComponent(x, y, true);
+            var complementaryPipe = SpawnComponent(x, y, true);
+            SpawnComponent(x, y, false).complementaryPipe = complementaryPipe;
             spawnedPipes++;
         }
 
-        private void SpawnComponent(int x, int y, bool complementary)
+        private PipeHandler SpawnComponent(int x, int y, bool complementary)
         {
             var newPipe = Instantiate(pipe, Vector3.zero, Quaternion.identity).GetComponent<PipeHandler>();
             newPipe.x = x;
             newPipe.y = complementary ? Settings.Instance.height - 3 - y : y;
             newPipe.complementary = complementary;
             if (!complementary) pipes.Add(newPipe);
+            return newPipe;
         }
 
         public void Reset()
