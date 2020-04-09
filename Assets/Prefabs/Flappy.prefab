@@ -101,7 +101,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
@@ -121,7 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5534816446552151457}
   handler: {fileID: 5534816446552151461}
-  aliveTime: 0
   player: 1
 --- !u!114 &5534816446552151461
 MonoBehaviour:

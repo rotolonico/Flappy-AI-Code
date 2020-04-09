@@ -17,5 +17,7 @@ namespace IO
 
             return inputs;
         }
+
+        public static float[] GetPixelsInputs(FlappyHandler flappy) => PixelsRetriever.Instance.RetrievePixels(flappy.gameObject);
     }
 }

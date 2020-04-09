@@ -14,9 +14,13 @@ namespace Game
         public int pipeDistance;
         public int inputs;
         public int outputs;
-        public bool normalInput;
+        public bool pixelsInput;
         public bool randomizePipes;
 
-        private void Awake() => Instance = this;
+        private void Awake()
+        {
+            Instance = this;
+            if (pixelsInput) inputs = pipeDistance * (height + 2);
+        }
     }
 }

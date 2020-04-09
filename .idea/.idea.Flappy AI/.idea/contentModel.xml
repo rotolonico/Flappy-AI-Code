@@ -108,6 +108,7 @@
           </e>
           <e p="IO" t="Include">
             <e p="InputsRetriever.cs" t="Include" />
+            <e p="PixelsRetriever.cs" t="Include" />
           </e>
           <e p="NN" t="Include">
             <e p="Layer.cs" t="Include" />
