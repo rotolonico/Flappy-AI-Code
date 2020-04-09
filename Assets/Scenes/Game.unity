@@ -189,6 +189,7 @@ MonoBehaviour:
   outputs: 2
   pixelsInput: 0
   randomizePipes: 1
+  autoGenerateConnections: 0
 --- !u!114 &125136705
 MonoBehaviour:
   m_ObjectHideFlags: 0

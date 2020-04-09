@@ -62,7 +62,7 @@ namespace AI.NEAT
                         new ConnectionGene(inputGenes.FirstOrDefault(x => x.Value == inputGene.Value).Key,
                             outputGenes.FirstOrDefault(x => x.Value == outputGene.Value).Key, RandomnessHandler.RandomZeroToOne() * 4 - 2, true,
                             newConnectionInnovation));
-                    break;
+                    if (!Settings.Instance.autoGenerateConnections) break;
                 }
             }
 

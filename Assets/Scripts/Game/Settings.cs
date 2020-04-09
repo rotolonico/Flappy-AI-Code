@@ -16,6 +16,7 @@ namespace Game
         public int outputs;
         public bool pixelsInput;
         public bool randomizePipes;
+        public bool autoGenerateConnections;
 
         private void Awake()
         {
