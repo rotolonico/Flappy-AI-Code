@@ -62,6 +62,7 @@ namespace AI.NEAT
                         new ConnectionGene(inputGenes.FirstOrDefault(x => x.Value == inputGene.Value).Key,
                             outputGenes.FirstOrDefault(x => x.Value == outputGene.Value).Key, RandomnessHandler.RandomZeroToOne() * 4 - 2, true,
                             newConnectionInnovation));
+                    break;
                 }
             }
 
@@ -75,7 +76,7 @@ namespace AI.NEAT
 
         public void Evaluate()
         {
-            foreach (var s in species) s.Reset();
+            species.Clear();
             HighestScore = float.MinValue;
             FittestGenome = null;
 
@@ -97,9 +98,8 @@ namespace AI.NEAT
                     species.Add(newSpecies);
                     g.Species = newSpecies;
                 }
-
-                //TODO change this
-                var score = g.Fitness;
+                
+                var score = EvaluateGenome(g.Genome);
                 g.Fitness = score;
                 g.Best = false;
                 

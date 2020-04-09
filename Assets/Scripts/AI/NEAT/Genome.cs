@@ -15,6 +15,8 @@ namespace AI.NEAT
 
         public Dictionary<int, NodeGene> Nodes;
         public Dictionary<int, ConnectionGene> Connections;
+        
+        public int AliveTime;
 
         public Genome() => InitializeGenome(new Dictionary<int, NodeGene>(), new Dictionary<int, ConnectionGene>());
 

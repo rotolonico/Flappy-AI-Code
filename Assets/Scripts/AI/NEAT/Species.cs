@@ -37,6 +37,7 @@ namespace AI.NEAT
         {
             Mascot = Members[RandomnessHandler.Random.Next(Members.Count)];
             Members.Clear();
+            LastCalculatedFitness = null;
         }
     }
 }

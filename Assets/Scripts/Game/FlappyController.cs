@@ -12,21 +12,18 @@ namespace Game
         public Rigidbody2D rb;
         public FlappyHandler handler;
         public GenomeWrapper genome;
-        public float aliveTime;
 
         public bool player;
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow)) Jump();
-            var inputs = InputsRetriever.GetInputs(handler);
-            //Debug.Log(inputs[0] + " " + inputs[1] + " " + inputs[2] + " ");
+            if (player && Input.GetKeyDown(KeyCode.UpArrow)) Jump();
         }
 
         private void FixedUpdate()
         {
             if (player) return;
-            aliveTime++;
+            genome.Genome.AliveTime++;
             var inputs = InputsRetriever.GetInputs(handler);
             var outputs = NetworkCalculator.TestNetworkGenome(genome.Network, inputs);
             if (outputs[0] > outputs[1]) Jump();
@@ -34,7 +31,8 @@ namespace Game
 
         private void Jump()
         {
-            rb.AddForce(player ? new Vector2(0, 300) : new Vector2(0, 60));
+            rb.velocity = Vector2.zero;
+            rb.AddForce(Vector2.up * (player ? 60 : 300), ForceMode2D.Force);
         }
     }
 }

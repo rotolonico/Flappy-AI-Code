@@ -22,7 +22,7 @@ namespace AI
 
         private void Start()
         {
-            evaluator = new Evaluator(populationSize, new Counter(), new Counter(), g => 0);
+            evaluator = new Evaluator(populationSize, new Counter(), new Counter(), g => Mathf.Pow(g.AliveTime, 2));
             InitiateFlappys();
         }
 

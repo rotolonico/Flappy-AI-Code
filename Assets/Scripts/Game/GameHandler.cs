@@ -31,7 +31,7 @@ namespace Game
             Instantiate(flappy, transform.position, Quaternion.identity);
             playerAlive = true;
             NEATHandler.Instance.InitiateFlappys();
-            Debug.Log(NEATHandler.Instance.evaluator.HighestScore);
+            Debug.Log("Score: " + NEATHandler.Instance.evaluator.FittestGenome.Fitness);
         }
     }
 }

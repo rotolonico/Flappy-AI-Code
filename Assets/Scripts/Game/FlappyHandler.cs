@@ -17,11 +17,6 @@ namespace Game
         {
             if (other.CompareTag("Pipe") || other.CompareTag("StaticPipe"))
             {
-                if (!flappyController.player)
-                {
-                    flappyController.genome.Fitness = Mathf.Pow(flappyController.aliveTime * 1000, 4);
-                }
-                
                 Destroy(gameObject);
             }
         }
