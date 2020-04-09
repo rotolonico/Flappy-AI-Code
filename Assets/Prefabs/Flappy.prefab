@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5534816446552151457}
   - component: {fileID: 5534816446552151460}
   - component: {fileID: 5534816446552151461}
-  - component: {fileID: 5534816446552151463}
   - component: {fileID: 5534816446552151458}
   m_Layer: 0
   m_Name: Flappy
@@ -31,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5534816446552151470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -136,18 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passedPipes: 0
   flappyController: {fileID: 0}
---- !u!114 &5534816446552151463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5534816446552151470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da9c2e86712056ec492d1e9a18f3495d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &5534816446552151458
 BoxCollider2D:
   m_ObjectHideFlags: 0

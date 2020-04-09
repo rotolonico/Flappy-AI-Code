@@ -21,7 +21,7 @@ namespace Game
         private void Awake()
         {
             Instance = this;
-            if (pixelsInput) inputs = pipeDistance * (height + 2);
+            if (pixelsInput) inputs = (pipeDistance + 2) * (height + 2);
         }
     }
 }

@@ -24,14 +24,13 @@ namespace Game
             }
         }
 
-        private void ResetGame()
+        public void ResetGame()
         {
             if (Settings.Instance.randomizePipes) PipeSpawner.Instance.Reset();
             Camera.main.transform.position = new Vector3(7, 0, -10);
             Instantiate(flappy, transform.position, Quaternion.identity);
             playerAlive = true;
             NEATHandler.Instance.InitiateFlappys();
-            Debug.Log("Score: " + NEATHandler.Instance.evaluator.FittestGenome.Fitness);
         }
     }
 }

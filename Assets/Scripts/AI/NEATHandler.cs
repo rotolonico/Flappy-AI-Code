@@ -28,16 +28,27 @@ namespace AI
 
         public void InitiateFlappys()
         {
+            foreach (var population in alivePopulation) Destroy(population.gameObject);
+            alivePopulation.Clear();
+
             foreach (var genome in evaluator.Genomes)
             {
                 var newFlappyAI = Instantiate(flappyAI, transform.position, Quaternion.identity);
-                newFlappyAI.GetComponent<FlappyController>().genome = genome;
+                var newFlappyAIController = newFlappyAI.GetComponent<FlappyController>().genome = genome;
                 alivePopulation.Add(newFlappyAI.GetComponent<FlappyHandler>());
+                
                 if (genome.Best)
                 {
                     newFlappyAI.GetComponent<SpriteRenderer>().color = Color.red;
                     newFlappyAI.GetComponent<SpriteRenderer>().sortingOrder = 3;
                 }
+
+                newFlappyAIController.Best = false;
+
+                if (evaluator.FittestGenome == null) continue;
+                NetworkDisplayer.Instance.DisplayNetwork(evaluator.FittestGenome.Genome);
+                Debug.Log("Score: " + evaluator.FittestGenome.Fitness);
+                evaluator.FittestGenome = null;
             }
         }
     }

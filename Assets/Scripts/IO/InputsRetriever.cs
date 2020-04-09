@@ -10,8 +10,8 @@ namespace IO
         {
             var inputs = new float[3];
             var flappyPosition = flappy.transform.position;
-            inputs[0] = (PipeSpawner.Instance.pipes[flappy.passedPipes].x - flappyPosition.x) / 5;
-            inputs[1] = (flappyPosition.y - (PipeSpawner.Instance.pipes[flappy.passedPipes].transform.position.y + 1 + PipeSpawner.Instance.pipes[flappy.passedPipes].y / 2)) / 5;
+            inputs[0] = flappy.passedPipes < PipeSpawner.Instance.pipes.Count ? (PipeSpawner.Instance.pipes[flappy.passedPipes].x - flappyPosition.x) / 5 : 1;
+            inputs[1] = (flappyPosition.y - (flappy.passedPipes < PipeSpawner.Instance.pipes.Count ? PipeSpawner.Instance.pipes[flappy.passedPipes].transform.position.y + 1 + PipeSpawner.Instance.pipes[flappy.passedPipes].y / 2 : 0)) / 5;
             //inputs[2] = (flappyPosition.y - (PipeSpawner.Instance.pipes[flappy.passedPipes].complementaryPipe.transform.position.y - 1 + PipeSpawner.Instance.pipes[flappy.passedPipes].complementaryPipe.y / 2)) / 5;
             inputs[2] = flappy.flappyController.rb.velocity.y / 10;
 

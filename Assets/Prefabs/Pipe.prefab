@@ -41,7 +41,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 7877327368361914354}
   - component: {fileID: 7877327368361914348}
   - component: {fileID: 1390942350765178248}
+  - component: {fileID: 8167656251153164971}
   m_Layer: 0
   m_Name: Pipe
   m_TagString: Pipe
@@ -151,7 +152,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -183,3 +184,15 @@ MonoBehaviour:
   y: 0
   complementary: 0
   complementaryPipe: {fileID: 0}
+--- !u!114 &8167656251153164971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7877327368361914353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9c2e86712056ec492d1e9a18f3495d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
