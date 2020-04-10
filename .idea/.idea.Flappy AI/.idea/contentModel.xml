@@ -102,9 +102,9 @@
             <e p="FlappyController.cs" t="Include" />
             <e p="FlappyHandler.cs" t="Include" />
             <e p="GameHandler.cs" t="Include" />
+            <e p="LeftForce.cs" t="Include" />
             <e p="PipeHandler.cs" t="Include" />
             <e p="PipeSpawner.cs" t="Include" />
-            <e p="RightForce.cs" t="Include" />
             <e p="Settings.cs" t="Include" />
           </e>
           <e p="IO" t="Include">

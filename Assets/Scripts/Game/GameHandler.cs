@@ -12,11 +12,14 @@ namespace Game
         public GameObject flappy;
         public bool playerAlive;
 
+        private Camera mainCamera;
+        
         private void Awake() => Instance = this;
+
+        private void Start() => mainCamera = Camera.main;
 
         private void Update()
         {
-            Debug.Log("Alive population:" + NEATHandler.Instance.alivePopulation.Count);
             if (!playerAlive && NEATHandler.Instance.alivePopulation.Count == 0)
             {
                 NEATHandler.Instance.evaluator.Evaluate();
@@ -24,13 +27,22 @@ namespace Game
             }
         }
 
+        public void ResetGameAndNetwork()
+        {
+            PipeSpawner.Instance.Reset();
+            mainCamera.transform.position = new Vector3(7, 0, -10);
+            NEATHandler.Instance.InitializeNetwork();
+            Instantiate(flappy, transform.position, Quaternion.identity);
+            playerAlive = true;
+        }
+
         public void ResetGame()
         {
             if (Settings.Instance.randomizePipes) PipeSpawner.Instance.Reset();
-            Camera.main.transform.position = new Vector3(7, 0, -10);
+            mainCamera.transform.position = new Vector3(7, 0, -10);
+            NEATHandler.Instance.InitiateGeneration();
             Instantiate(flappy, transform.position, Quaternion.identity);
             playerAlive = true;
-            NEATHandler.Instance.InitiateFlappys();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Game
 
         private void Update()
         {
-            if (player && Input.GetKeyDown(KeyCode.UpArrow)) Jump();
+            if (player && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))) Jump();
         }
 
         private void FixedUpdate()

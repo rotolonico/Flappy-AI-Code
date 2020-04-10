@@ -5,6 +5,7 @@ using AI.LiteNN;
 using AI.NEAT;
 using Game;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AI
 {
@@ -18,17 +19,22 @@ namespace AI
 
         public Evaluator evaluator;
 
+        public Toggle sevenInputsMode;
+
         private void Awake() => Instance = this;
 
-        private void Start()
+        private void Start() => InitializeNetwork();
+
+        public void InitializeNetwork()
         {
+            Settings.Instance.inputs = sevenInputsMode.isOn ? 7 : 3;
             evaluator = new Evaluator(populationSize, new Counter(), new Counter(), g => Mathf.Pow(g.AliveTime, 2));
-            InitiateFlappys();
+            InitiateGeneration();
         }
 
-        public void InitiateFlappys()
+        public void InitiateGeneration()
         {
-            foreach (var population in alivePopulation) Destroy(population.gameObject);
+            foreach (var flappy in GameObject.FindGameObjectsWithTag("Flappy")) Destroy(flappy.gameObject);
             alivePopulation.Clear();
 
             foreach (var genome in evaluator.Genomes)
@@ -47,7 +53,6 @@ namespace AI
 
                 if (evaluator.FittestGenome == null) continue;
                 NetworkDisplayer.Instance.DisplayNetwork(evaluator.FittestGenome.Genome);
-                Debug.Log("Score: " + evaluator.FittestGenome.Fitness);
                 evaluator.FittestGenome = null;
             }
         }

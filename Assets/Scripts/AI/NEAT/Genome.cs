@@ -56,8 +56,6 @@ namespace AI.NEAT
             Nodes.Add(newNode.Innovation, newNode);
             Connections.Add(inToNew.Innovation, inToNew);
             Connections.Add(newToOut.Innovation, newToOut);
-            
-            //Debug.Log("Node mutation");
         }
 
         public void AddConnectionMutation(Counter connectionInnovation, int maxAttempts)
@@ -102,8 +100,6 @@ namespace AI.NEAT
 
                 success = true;
             }
-            
-            //Debug.Log("Connection mutation: " + success);
         }
 
         public void WeightMutation()
@@ -115,8 +111,6 @@ namespace AI.NEAT
                 else
                     connection.Weight = RandomnessHandler.RandomZeroToOne() * 4f - 2;
             }
-            
-            //Debug.Log("Weight mutation");
         }
 
         public static float CalculateCompatibilityDistance(Genome genome1, Genome genome2, float c1, float c2, float c3)

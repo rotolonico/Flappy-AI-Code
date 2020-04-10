@@ -62,7 +62,6 @@ namespace AI
                 newConnectionLine.SetPosition(0, nodesGameObjects[connection.Value.InNode].transform.position);
                 newConnectionLine.SetPosition(1, nodesGameObjects[connection.Value.OutNode].transform.position);
                 var lineColor = Color.Lerp(negativeColor, positiveColor, (connection.Value.Weight + 2) / 4);
-                Debug.Log((connection.Value.Weight + 2) / 4);
                 newConnectionLine.startColor = lineColor;
                 newConnectionLine.endColor = lineColor;
             }
