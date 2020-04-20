@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace AI.NEAT.Genes
 {
+    [Serializable]
     public class NodeGene
     {
         public enum TypeE
@@ -12,10 +13,10 @@ namespace AI.NEAT.Genes
             Output
         }
 
-        public TypeE Type { get;}
-        public int Innovation { get;}
-        public float X { get; }
-        public int Y { get; }
+        public TypeE Type;
+        public int Innovation;
+        public float X;
+        public int Y;
         
         public NodeGene(TypeE type, int innovation, float x, int y)
         {

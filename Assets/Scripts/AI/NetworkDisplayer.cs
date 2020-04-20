@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using AI.NEAT;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,7 +55,7 @@ namespace AI
         {
             yield return null;
             
-            foreach (var connection in genome.Connections)
+            foreach (var connection in genome.Connections.Where(c => c.Value.Expressed))
             {
                 var newConnection = Instantiate(connectionPrefab, transform.position, Quaternion.identity).transform;
                 newConnection.SetParent(networkConnectionsContainer, false);

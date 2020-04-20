@@ -1,8 +1,11 @@
-﻿namespace AI.NEAT
+﻿using System;
+
+namespace AI.NEAT
 {
+    [Serializable]
     public class Counter
     {
-        private int currentInnovation;
+        public int currentInnovation;
 
         public int GetInnovation()
         {

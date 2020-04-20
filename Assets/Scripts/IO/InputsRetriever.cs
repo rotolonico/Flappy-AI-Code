@@ -10,6 +10,7 @@ namespace IO
         public static float[] GetInputs(FlappyHandler flappy)
         {
             var inputs = new float[NEATHandler.Instance.sevenInputsMode.isOn ? 7 : 3];
+            Settings.Instance.inputs = NEATHandler.Instance.sevenInputsMode.isOn ? 7 : 3;
             var flappyPosition = flappy.transform.position;
             
             inputs[0] = flappy.passedPipes < PipeSpawner.Instance.pipes.Count

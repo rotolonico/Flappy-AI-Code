@@ -1,44 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AI.LiteNN;
 using AI.NEAT.Genes;
 using Game;
+using NNUtils;
 using UnityEngine;
 using Utils;
 
 namespace AI.NEAT
 {
+    [Serializable]
     public class Genome
     {
         private const float PerturbingProbability = 0.9f;
+        private const float PerturbingStrength = 0.01f;
+        private const float WeightStrength = 1f;
 
         public Dictionary<int, NodeGene> Nodes;
         public Dictionary<int, ConnectionGene> Connections;
+
+        public Counter NodeCounter;
+        public Counter ConnectionsCounter;
         
-        public int AliveTime;
+        public float Score;
 
-        public Genome() => InitializeGenome(new Dictionary<int, NodeGene>(), new Dictionary<int, ConnectionGene>());
+        public Genome(Counter nodeCounter, Counter connectionsCounter) => InitializeGenome(new Dictionary<int, NodeGene>(), new Dictionary<int, ConnectionGene>(), nodeCounter, connectionsCounter);
 
-        public Genome(Dictionary<int, NodeGene> nodes, Dictionary<int, ConnectionGene> connections) =>
-            InitializeGenome(nodes, connections);
+        public Genome(Dictionary<int, NodeGene> nodes, Dictionary<int, ConnectionGene> connections, Counter nodeCounter, Counter connectionsCounter) =>
+            InitializeGenome(nodes, connections, nodeCounter, connectionsCounter);
 
         public Genome(Genome toBeCopied)
         {
-            InitializeGenome(new Dictionary<int, NodeGene>(), new Dictionary<int, ConnectionGene>());
+            InitializeGenome(new Dictionary<int, NodeGene>(), new Dictionary<int, ConnectionGene>(), NodeCounter, ConnectionsCounter);
 
             foreach (var node in toBeCopied.Nodes) Nodes[node.Key] = node.Value.Copy();
             foreach (var connection in toBeCopied.Connections) Connections[connection.Key] = connection.Value.Copy();
+
+            NodeCounter = toBeCopied.NodeCounter;
+            ConnectionsCounter = toBeCopied.ConnectionsCounter;
         }
 
-        private void InitializeGenome(Dictionary<int, NodeGene> nodes, Dictionary<int, ConnectionGene> connections)
+        public int AliveTime { get; set; }
+
+        private void InitializeGenome(Dictionary<int, NodeGene> nodes, Dictionary<int, ConnectionGene> connections, Counter nodeCounter, Counter connectionsCounter)
         {
             Nodes = nodes;
             Connections = connections;
+            NodeCounter = nodeCounter;
+            ConnectionsCounter = connectionsCounter;
         }
 
         public void AddNodeMutation(Counter nodeInnovation, Counter connectionInnovation)
         {
+            if (Connections.Values.Count == 0) return;
+            
             var oldConnection = Connections.Values.ToArray()[RandomnessHandler.Random.Next(Connections.Count)];
             var inNode = Nodes[oldConnection.InNode];
             var outNode = Nodes[oldConnection.OutNode];
@@ -63,7 +80,7 @@ namespace AI.NEAT
             var currentAttempt = 0;
             var success = false;
 
-            while (currentAttempt < maxAttempts && !success)
+            while (currentAttempt < maxAttempts)
             {
                 currentAttempt++;
 
@@ -107,10 +124,18 @@ namespace AI.NEAT
             foreach (var connection in Connections.Values)
             {
                 if (RandomnessHandler.RandomZeroToOne() < PerturbingProbability)
-                    connection.Weight *= RandomnessHandler.RandomZeroToOne() * 4f - 2;
+                    connection.Weight *= RandomnessHandler.RandomZeroToOne() * 2f - 1 * PerturbingStrength;
                 else
-                    connection.Weight = RandomnessHandler.RandomZeroToOne() * 4f - 2;
+                    connection.Weight = RandomnessHandler.RandomZeroToOne() * 2f - 1 * WeightStrength;
             }
+        }
+
+        public void ToggleConnectionMutation()
+        {
+            if (Connections.Values.Count == 0) return;
+            
+            var connection = Connections.Values.ToArray()[RandomnessHandler.Random.Next(Connections.Values.Count)];
+            connection.Expressed = !connection.Expressed;
         }
 
         public static float CalculateCompatibilityDistance(Genome genome1, Genome genome2, float c1, float c2, float c3)
@@ -148,6 +173,7 @@ namespace AI.NEAT
                 }
             }
 
+            if (genome1.Connections.Count == 0 || genome2.Connections.Count == 0) return new GenomesGenesInfo(0, 0, 0, 0);
             var highestConnectionInnovation1 = genome1.Connections.Keys.Max();
             var highestConnectionInnovation2 = genome2.Connections.Keys.Max();
             var connectionIndices = Math.Max(highestConnectionInnovation1, highestConnectionInnovation2);
@@ -181,13 +207,13 @@ namespace AI.NEAT
 
             return new GenomesGenesInfo(matchingGenes + matchingConnectionGenes,
                 disjointGenes + disjointConnectionGenes,
-                excessGenes + excessConnectionGenes, weightDifference / matchingConnectionGenes);
+                excessGenes + excessConnectionGenes, matchingConnectionGenes == 0 ? 0 : weightDifference / matchingConnectionGenes);
         }
 
         // parent1 should be the most fit parent
         public static Genome Crossover(Genome parent1, Genome parent2)
         {
-            var child = new Genome();
+            var child = new Genome(parent1.NodeCounter, parent1.ConnectionsCounter);
             
             foreach (var node in parent1.Nodes.Values) child.Nodes.Add(node.Innovation, node.Copy());
             foreach (var connection1 in parent1.Connections.Values)
@@ -195,15 +221,35 @@ namespace AI.NEAT
                 if (parent2.Connections.TryGetValue(connection1.Innovation, out var connection2) && connection2.Expressed)
                 {
                     var childConnectionGene = RandomnessHandler.RandomBool() ? connection1 : connection2;
-                    child.Connections.Add(childConnectionGene.Innovation, childConnectionGene);
+                    child.Connections.Add(childConnectionGene.Innovation, childConnectionGene.Copy());
                 }
                 else
                 {
-                    child.Connections.Add(connection1.Innovation, connection1);
+                    child.Connections.Add(connection1.Innovation, connection1.Copy());
                 }
             }
 
             return child;
+        }
+
+        public void SaveGenome(string name)
+        {
+            var json = StringSerializationAPI.Serialize(typeof(Genome), this);
+
+            var file = new FileInfo($"{Application.persistentDataPath}/Genomes/{name}");
+            file.Directory?.Create();
+            File.WriteAllText(file.FullName, json);
+        }
+
+        public static Genome LoadGenome(string name)
+        {
+            var path = $"{Application.persistentDataPath}/Genomes/{name}";
+            
+            var json = !File.Exists(path)
+                ? ""
+                : File.ReadAllText(path);
+
+            return json == "" ? null : StringSerializationAPI.Deserialize(typeof(Genome), json) as Genome;
         }
     }
 }

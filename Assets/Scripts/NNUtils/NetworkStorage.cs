@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using AI.NEAT;
 using NN;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -44,6 +45,31 @@ namespace NNUtils
                 if (request.isNetworkError || request.isHttpError)
                     fallback(request.error);
                 else callback(StringSerializationAPI.Deserialize(typeof(NeuralNetwork), request.downloadHandler.text) as NeuralNetwork);
+            }
+        }
+        
+        public static Genome LoadGenome(string path)
+        {
+            var json = !File.Exists(path)
+                ? ""
+                : File.ReadAllText(path);
+
+            return json == "" ? null : StringSerializationAPI.Deserialize(typeof(Genome), json) as Genome;
+        }
+
+        public void DownloadGenome(string url, Action<Genome> callback, Action<string> fallback) =>
+            StartCoroutine(DownloadGenomeCoroutine(url, callback, fallback));
+
+        private static IEnumerator DownloadGenomeCoroutine(string url, Action<Genome> callback,
+            Action<string> fallback)
+        {
+            using (var request = UnityWebRequest.Get(url))
+            {
+                yield return request.SendWebRequest();
+
+                if (request.isNetworkError || request.isHttpError)
+                    fallback(request.error);
+                else callback(StringSerializationAPI.Deserialize(typeof(Genome), request.downloadHandler.text) as Genome);
             }
         }
     }

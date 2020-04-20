@@ -3,13 +3,14 @@ using UnityEngine;
 
 namespace AI.NEAT.Genes
 {
+    [Serializable]
     public class ConnectionGene
     {
-        public int InNode { get; }
-        public int OutNode { get; }
-        public float Weight { get; set; }
-        public bool Expressed { get; private set; }
-        public int Innovation { get; }
+        public int InNode;
+        public int OutNode;
+        public float Weight;
+        public bool Expressed;
+        public int Innovation;
 
         public ConnectionGene(int inNode, int outNode, float weight, bool expressed, int innovation)
         {
