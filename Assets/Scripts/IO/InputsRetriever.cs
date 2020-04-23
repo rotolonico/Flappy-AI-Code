@@ -14,7 +14,7 @@ namespace IO
             var flappyPosition = flappy.transform.position;
             
             inputs[0] = flappy.passedPipes < PipeSpawner.Instance.pipes.Count
-                ? (PipeSpawner.Instance.pipes[flappy.passedPipes].x - flappyPosition.x) / 5
+                ? (PipeSpawner.Instance.pipes[flappy.passedPipes].transform.position.x - flappyPosition.x) / 5
                 : 1;
             inputs[1] = (flappyPosition.y - (flappy.passedPipes < PipeSpawner.Instance.pipes.Count
                              ? PipeSpawner.Instance.pipes[flappy.passedPipes].transform.position.y +
@@ -29,7 +29,7 @@ namespace IO
                                PipeSpawner.Instance.pipes[flappy.passedPipes].complementaryPipe.y / 2
                              : 0)) / 5;
             inputs[4] = flappy.passedPipes + 1 < PipeSpawner.Instance.pipes.Count
-                ? (PipeSpawner.Instance.pipes[flappy.passedPipes + 1].x - flappyPosition.x) / 10
+                ? (PipeSpawner.Instance.pipes[flappy.passedPipes + 1].transform.position.x - flappyPosition.x) / 10
                 : 1;
             inputs[5] = (flappyPosition.y - (flappy.passedPipes + 1 < PipeSpawner.Instance.pipes.Count
                              ? PipeSpawner.Instance.pipes[flappy.passedPipes + 1].transform.position.y +

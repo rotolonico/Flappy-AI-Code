@@ -49,7 +49,7 @@ namespace AI
                 alivePopulation.Add(newPlayerAI.GetComponent<FlappyHandler>());
 
                 if (!genome.Best) continue;
-                NetworkDisplayer.Instance.DisplayNetwork(genome.Genome);
+                NetworkDisplayer.Instance.DisplayNetwork(genome);
                 var newPlayerAISpriteRenderer = newPlayerAI.GetComponent<SpriteRenderer>();
                 newPlayerAISpriteRenderer.color = Color.red;
                 newPlayerAISpriteRenderer.sortingOrder = 1;
@@ -65,7 +65,7 @@ namespace AI
             newPlayerController.genome.Best = true;
             alivePopulation.Add(newPlayerAI.GetComponent<FlappyHandler>());
 
-            NetworkDisplayer.Instance.DisplayNetwork(genome.Genome);
+            NetworkDisplayer.Instance.DisplayNetwork(genome);
             newPlayerAI.GetComponent<SpriteRenderer>().color = Color.red;
         }
     }

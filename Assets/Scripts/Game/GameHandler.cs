@@ -22,14 +22,18 @@ namespace Game
 
         private bool inRaceMode;
 
+        private float gameTime;
+        private int generation;
+
         private void Awake() => Instance = this;
 
         private void Start() => mainCamera = Camera.main;
 
         private void Update()
         {
+            gameTime += Time.deltaTime;
             if (!raceNetwork.isOn
-                ? NEATHandler.Instance.alivePopulation.Count != 0
+                ? NEATHandler.Instance.alivePopulation.Count != 0 && Settings.Instance.gameTime * (generation + 1) > gameTime
                 : playerAlive) return;
             if (raceNetwork.isOn)
                 ResetRaceGame();
@@ -38,6 +42,9 @@ namespace Game
                 NEATHandler.Instance.evaluator.Evaluate();
                 ResetGame();
             }
+
+            generation++;
+            gameTime = 0;
         }
 
         public void ResetRaceGame()
@@ -74,6 +81,7 @@ namespace Game
                 PipeSpawner.Instance.automaticPipes.interactable = true;
             }
             playerAlive = true;
+            generation = 0;
         }
 
         public void ResetGame()

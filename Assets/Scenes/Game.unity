@@ -266,6 +266,7 @@ MonoBehaviour:
   pixelsInput: 0
   randomizePipes: 1
   autoGenerateConnections: 0
+  gameTime: 1
 --- !u!114 &125136705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +335,8 @@ MonoBehaviour:
     type: 3}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   positiveColor: {r: 0, g: 0.06871343, b: 1, a: 1}
+  activeColor: {r: 0, g: 1, b: 0, a: 1}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &146234317
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ namespace Game
         public bool pixelsInput;
         public bool randomizePipes;
         public bool autoGenerateConnections;
+        public int gameTime;
 
         private void Awake()
         {
